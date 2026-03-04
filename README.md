@@ -2,7 +2,7 @@
 
 A modern developer portfolio built with *React + Vite*, showcasing my projects, skills, and experience as a software developer.
 
-🔗 Live Website: https://your-vercel-link.vercel.app
+🔗 Live Website: https://souvik-portfolio-livid.vercel.app/
 
 ---
 
