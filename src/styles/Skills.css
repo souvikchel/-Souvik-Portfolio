@@ -4,10 +4,13 @@
     overflow: hidden;
 }
 
+/* CATEGORY STACK (FULL WIDTH) */
+
 .skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-2xl);
+    width: 100%;
 }
 
 .skill-category {
@@ -20,10 +23,16 @@
     text-align: center;
 }
 
+/* SKILLS GRID FIX */
+
 .skills-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: var(--spacing-md);
+    width: 100%;
 }
+
+/* CARD */
 
 .skill-card {
     display: flex;
@@ -32,7 +41,10 @@
     padding: var(--spacing-md);
     position: relative;
     overflow: hidden;
+    border-radius: var(--radius-md);
 }
+
+/* LEFT GRADIENT */
 
 .skill-card::before {
     content: '';
@@ -49,6 +61,8 @@
 .skill-card:hover::before {
     transform: scaleY(1);
 }
+
+/* ICON */
 
 .skill-icon {
     font-size: 2rem;
@@ -68,6 +82,8 @@
     background: var(--gradient-primary);
 }
 
+/* INFO */
+
 .skill-info {
     flex: 1;
 }
@@ -78,6 +94,8 @@
     color: var(--color-text-primary);
     font-weight: 600;
 }
+
+/* PROGRESS BAR */
 
 .skill-bar {
     position: relative;
@@ -114,7 +132,8 @@
     white-space: nowrap;
 }
 
-/* Animate skill bars on scroll */
+/* SKILL BAR ANIMATION */
+
 .skill-card {
     --skill-level: 0%;
 }
@@ -127,35 +146,26 @@
     from {
         width: 0%;
     }
-
     to {
         width: var(--skill-level);
     }
 }
 
-/* 3D Card Effect */
+/* 3D HOVER EFFECT */
+
 .skill-card {
     transform-style: preserve-3d;
-    transition: transform var(--transition-base);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .skill-card:hover {
-    transform: perspective(1000px) rotateY(5deg) rotateX(2deg);
+    transform: perspective(1000px) rotateY(5deg) rotateX(2deg) translateY(-5px);
+    box-shadow: 0 0 25px rgba(99,102,241,0.3);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-xl);
-    }
-}
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
-    .skills-container {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-    }
 
     .skill-card {
         padding: var(--spacing-sm);
@@ -166,9 +176,11 @@
         height: 50px;
         font-size: 1.5rem;
     }
+
 }
 
 @media (max-width: 480px) {
+
     .category-title {
         font-size: 1.25rem;
     }
@@ -176,4 +188,5 @@
     .skill-name {
         font-size: 0.9rem;
     }
+
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import '../styles/About.css';
+import profileImage from '../assets/profile.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,10 +11,10 @@ const About = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Animate section title
-            gsap.from('.about .section-title', {
+
+            gsap.from('.about-title', {
                 scrollTrigger: {
-                    trigger: '.about',
+                    trigger: sectionRef.current,
                     start: 'top 80%',
                 },
                 y: 50,
@@ -23,7 +23,17 @@ const About = () => {
                 ease: 'power3.out'
             });
 
-            // Animate cards
+            gsap.from('.about-image', {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 80%',
+                },
+                x: 80,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+
             cardsRef.current.forEach((card, index) => {
                 gsap.from(card, {
                     scrollTrigger: {
@@ -38,18 +48,6 @@ const About = () => {
                 });
             });
 
-            // Animate stats
-            gsap.from('.stat-item', {
-                scrollTrigger: {
-                    trigger: '.stats-grid',
-                    start: 'top 85%',
-                },
-                scale: 0,
-                opacity: 0,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'back.out(1.7)'
-            });
         }, sectionRef);
 
         return () => ctx.revert();
@@ -63,80 +61,155 @@ const About = () => {
 
     const highlights = [
         {
-            icon: '🎨',
-            title: 'Creative Design',
-            description: 'Crafting visually stunning interfaces that captivate and engage users with modern aesthetics.'
+            icon: '🧩',
+            title: 'Architecting Solutions',
+            description: 'Transforming complex ideas into scalable, real-world applications with clean architecture and structured thinking.'
         },
         {
             icon: '⚡',
-            title: 'Performance First',
-            description: 'Building lightning-fast applications optimized for the best user experience across all devices.'
+            title: 'Performance-Driven Code',
+            description: 'Blending strong Data Structures & Algorithms with modern development practices to build fast, optimized systems.'
+        },
+        {
+            icon: '🌐',
+            title: 'Full-Stack Expertise',
+            description: 'Engineering seamless end-to-end web experiences.'
         },
         {
             icon: '🚀',
-            title: 'Modern Tech',
-            description: 'Leveraging cutting-edge technologies like Three.js, React, and WebGL for immersive experiences.'
-        },
-        {
-            icon: '💡',
-            title: 'Innovation',
-            description: 'Constantly exploring new techniques and pushing boundaries in web development.'
+            title: 'Continuous Growth',
+            description: 'Committed to learning emerging technologies and industry best practices.'
         }
     ];
 
-    const stats = [
-        { value: '50+', label: 'Projects Completed' },
-        { value: '5+', label: 'Years Experience' },
-        { value: '30+', label: 'Happy Clients' },
-        { value: '100%', label: 'Client Satisfaction' }
-    ];
-
     return (
-        <section id="about" className="about section" ref={sectionRef}>
-            <div className="container">
-                <h2 className="section-title">About Me</h2>
+        <section
+            id="about"
+            ref={sectionRef}
+            style={{ padding: '100px 0' }}
+        >
+            <div style={{ width: '90%', margin: 'auto', maxWidth: '1200px' }}>
 
-                <div className="about-content">
-                    <div className="about-text">
-                        <h3 className="gradient-text-secondary">
-                            Passionate Full-Stack Developer & 3D Enthusiast
+                <h2
+                    className="about-title"
+                    style={{
+                        textAlign: 'center',
+                        fontSize: '2.5rem',
+                        marginBottom: '60px'
+                    }}
+                >
+                    About Me
+                </h2>
+
+                {/* Main Content */}
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '60px',
+                        flexWrap: 'wrap'
+                    }}
+                >
+
+                    {/* LEFT SIDE */}
+                    <div style={{ flex: 1, minWidth: '300px' }}>
+                        <h3 style={{
+                            fontSize: '1.8rem',
+                            marginBottom: '15px',
+                            background: 'linear-gradient(90deg,#6366f1,#14b8a6)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent'
+                        }}>
+                            Full-Stack Developer | B.Tech IT (2023–2027)
                         </h3>
-                        <p>
-                            I'm a creative developer who loves bringing ideas to life through code.
-                            With expertise in modern web technologies and a keen eye for design,
-                            I create immersive digital experiences that leave lasting impressions.
+
+                        <div style={{
+                            display: 'inline-block',
+                            padding: '8px 16px',
+                            borderRadius: '20px',
+                            background: 'linear-gradient(135deg,#6366f1,#14b8a6)',
+                            color: '#fff',
+                            fontSize: '0.85rem',
+                            marginBottom: '20px'
+                        }}>
+                            🎓 Institute of Engineering & Management (IEM), Kolkata
+                        </div>
+
+                        <p style={{ lineHeight: '1.7', marginBottom: '15px' }}>
+                            I am currently pursuing B.Tech in Information Technology at IEM Kolkata.
+                            Passionate about software development, I specialize in building scalable,
+                            efficient, and user-centric applications.
                         </p>
-                        <p>
-                            My journey in web development has led me to specialize in Three.js and
-                            React, combining stunning 3D graphics with powerful interactive applications.
-                            I'm constantly learning and adapting to new technologies to deliver
-                            cutting-edge solutions.
+
+                        <p style={{ lineHeight: '1.7' }}>
+                            With a strong foundation in Data Structures and Algorithms,
+                            I focus on writing optimized and maintainable code while
+                            designing impactful digital solutions.
                         </p>
                     </div>
 
-                    <div className="highlights-grid">
-                        {highlights.map((highlight, index) => (
-                            <div
-                                key={index}
-                                className="highlight-card glass-card"
-                                ref={addToRefs}
-                            >
-                                <div className="highlight-icon">{highlight.icon}</div>
-                                <h4>{highlight.title}</h4>
-                                <p>{highlight.description}</p>
-                            </div>
-                        ))}
+                    {/* RIGHT SIDE IMAGE */}
+                    <div
+                        className="about-image"
+                        style={{
+                            flex: 1,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            minWidth: '300px'
+                        }}
+                    >
+                        <img
+                            src={profileImage}
+                            alt="Souvik Chel"
+                            style={{
+                                width: '340px',
+                                height: '340px',
+                                objectFit: 'cover',
+                                borderRadius: '20px',
+                                boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                                transition: '0.4s'
+                            }}
+                        />
                     </div>
+
                 </div>
 
-                <div className="stats-grid">
-                    {stats.map((stat, index) => (
-                        <div key={index} className="stat-item">
-                            <div className="stat-value gradient-text">{stat.value}</div>
-                            <div className="stat-label">{stat.label}</div>
+                {/* Highlights */}
+                <div
+                    style={{
+                        marginTop: '80px',
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                        gap: '30px'
+                    }}
+                >
+                    {highlights.map((highlight, index) => (
+                        <div
+                            key={index}
+                            ref={addToRefs}
+                            style={{
+                                padding: '25px',
+                                borderRadius: '15px',
+                                backdropFilter: 'blur(10px)',
+                                background: 'rgba(255,255,255,0.05)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                transition: '0.3s'
+                            }}
+                        >
+                            <div style={{ fontSize: '2rem', marginBottom: '10px' }}>
+                                {highlight.icon}
+                            </div>
+                            <h4 style={{ marginBottom: '10px' }}>
+                                {highlight.title}
+                            </h4>
+                            <p style={{ fontSize: '0.9rem', lineHeight: '1.6' }}>
+                                {highlight.description}
+                            </p>
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );

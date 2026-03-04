@@ -46,44 +46,55 @@ const Projects = () => {
         }
     };
 
-    const projects = [
-        {
-            title: '3D Product Visualizer',
-            description: 'An interactive 3D product showcase built with Three.js, allowing users to explore products in immersive detail with realistic lighting and materials.',
-            tags: ['Three.js', 'React', 'WebGL', 'GSAP'],
-            color: 'var(--color-primary)'
-        },
-        {
-            title: 'Portfolio Platform',
-            description: 'A modern portfolio platform featuring smooth animations, parallax effects, and an intuitive content management system for creative professionals.',
-            tags: ['React', 'Node.js', 'MongoDB', 'GSAP'],
-            color: 'var(--color-secondary)'
-        },
-        {
-            title: 'E-Commerce Experience',
-            description: 'A cutting-edge e-commerce platform with real-time inventory, advanced filtering, and seamless checkout experience powered by modern technologies.',
-            tags: ['Next.js', 'Stripe', 'Redux', 'Tailwind'],
-            color: 'var(--color-accent)'
-        },
-        {
-            title: 'Virtual Showroom',
-            description: 'An immersive virtual showroom experience with 3D navigation, interactive hotspots, and realistic product presentations in a WebGL environment.',
-            tags: ['Three.js', 'React', 'Blender', 'WebXR'],
-            color: 'var(--color-accent-2)'
-        },
-        {
-            title: 'Analytics Dashboard',
-            description: 'A comprehensive analytics dashboard with real-time data visualization, interactive charts, and customizable reporting features for business insights.',
-            tags: ['React', 'D3.js', 'Node.js', 'PostgreSQL'],
-            color: 'var(--color-primary-light)'
-        },
-        {
-            title: 'AI Chat Interface',
-            description: 'An intelligent chat interface powered by AI, featuring natural language processing, context awareness, and seamless user interactions.',
-            tags: ['React', 'OpenAI', 'WebSocket', 'Express'],
-            color: '#14b8a6'
-        }
-    ];
+const projects = [
+
+    {
+        title: 'Solar EV Smart Charging Station (V2V Enabled)',
+        description: 'A renewable-energy based EV charging ecosystem integrating solar power generation with Vehicle-to-Vehicle (V2V) charging technology.',
+        tags: [
+            'Solar Energy',
+            'EV Charging',
+            'V2V Charging',
+            'Wireless Power Transfer',
+            'IoT Systems'
+        ],
+        color: '#22c55e',
+        repo: 'https://github.com/souvikchel/Multipurpose_EV'
+    },
+
+    {
+        title: 'MindEase – AI Emotional Companion',
+        description: 'An AI-powered emotional support platform designed to provide a safe, judgment-free space for users.',
+        tags: ['React', 'Node.js', 'Express', 'AI/NLP', 'MongoDB'],
+        color: 'var(--color-primary)',
+        repo: 'https://github.com/souvikchel/MindEase-Your-AI-Friend'
+    },
+
+    {
+        title: 'Media Discovery Platform',
+        description: 'A Netflix-inspired responsive web platform for exploring trending and popular media.',
+        tags: ['HTML', 'CSS', 'Responsive Design', 'UI/UX'],
+        color: 'var(--color-secondary)',
+        repo: 'https://github.com/souvikchel/Media-Discovery-Platform'
+    },
+
+    {
+        title: 'Quiz App (React + Vite)',
+        description: 'A high-performance quiz application with timed challenges and leaderboard.',
+        tags: ['React', 'Vite', 'JavaScript', 'State Management'],
+        color: 'var(--color-accent)',
+        repo: 'https://github.com/souvikchel/quiz-app'
+    },
+
+    {
+        title: 'Sudoku Master',
+        description: 'An interactive web-based Sudoku game with puzzle generation and validation.',
+        tags: ['JavaScript', 'HTML', 'CSS', 'Game Logic'],
+        color: 'var(--color-accent-2)',
+        repo: 'https://github.com/souvikchel/Sudoku'
+    }
+
+];
 
     return (
         <section id="projects" className="projects section" ref={sectionRef}>
@@ -103,29 +114,48 @@ const Projects = () => {
                             style={{ '--accent-color': project.color }}
                         >
                             <div className="project-card-inner">
-                                <div className="project-number">0{index + 1}</div>
+
+                                <div className="project-number">
+                                    0{index + 1}
+                                </div>
 
                                 <div className="project-content">
-                                    <h3 className="project-title">{project.title}</h3>
-                                    <p className="project-description">{project.description}</p>
+                                    <h3 className="project-title">
+                                        {project.title}
+                                    </h3>
+
+                                    <p className="project-description">
+                                        {project.description}
+                                    </p>
 
                                     <div className="project-tags">
                                         {project.tags.map((tag, tagIndex) => (
-                                            <span key={tagIndex} className="project-tag">
+                                            <span
+                                                key={tagIndex}
+                                                className="project-tag"
+                                            >
                                                 {tag}
                                             </span>
                                         ))}
                                     </div>
                                 </div>
 
+                                {/* GITHUB LINK BUTTON */}
+
                                 <div className="project-link">
-                                    <button className="btn-icon">
+                                    <a
+                                        href={project.repo}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn-icon"
+                                    >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <line x1="7" y1="17" x2="17" y2="7"></line>
                                             <polyline points="7 7 17 7 17 17"></polyline>
                                         </svg>
-                                    </button>
+                                    </a>
                                 </div>
+
                             </div>
                         </div>
                     ))}

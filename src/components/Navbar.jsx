@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
+    const navbarRef = useRef(null);
+    const linksRef = useRef([]);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -16,22 +18,23 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        // Animate navbar on mount
-        gsap.from('.navbar', {
-            y: -100,
-            opacity: 0,
-            duration: 1,
-            ease: 'power3.out'
-        });
+        const ctx = gsap.context(() => {
 
-        gsap.from('.nav-link', {
-            y: -20,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: 'power2.out',
-            delay: 0.3
-        });
+            gsap.fromTo(
+                navbarRef.current,
+                { y: -100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+            );
+
+            gsap.fromTo(
+                linksRef.current,
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 0.3 }
+            );
+
+        }, navbarRef);
+
+        return () => ctx.revert();
     }, []);
 
     const scrollToSection = (id) => {
@@ -42,26 +45,32 @@ const Navbar = () => {
         }
     };
 
-    const navLinks = [
-        { id: 'home', label: 'Home' },
-        { id: 'about', label: 'About' },
-        { id: 'projects', label: 'Projects' },
-        { id: 'skills', label: 'Skills' },
-        { id: 'contact', label: 'Contact' }
-    ];
+   const navLinks = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' }, // ✅ Added
+  { id: 'contact', label: 'Contact' }
+];
 
     return (
-        <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+        <nav
+            ref={navbarRef}
+            className={`navbar ${isScrolled ? 'scrolled' : ''}`}
+            style={{ zIndex: 9999 }}
+        >
             <div className="container nav-container">
+
                 <div className="logo">
-                    <span className="gradient-text">Portfolio</span>
+                    <span className="gradient-text">Souvik Chel</span>
                 </div>
 
-                {/* Desktop Navigation */}
                 <ul className="nav-links desktop-nav">
-                    {navLinks.map((link) => (
+                    {navLinks.map((link, index) => (
                         <li key={link.id}>
                             <a
+                                ref={(el) => linksRef.current[index] = el}
                                 href={`#${link.id}`}
                                 className="nav-link"
                                 onClick={(e) => {
@@ -75,7 +84,6 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                {/* CTA Button */}
                 <button
                     className="btn btn-primary nav-cta"
                     onClick={() => scrollToSection('contact')}
@@ -83,18 +91,15 @@ const Navbar = () => {
                     Let's Talk
                 </button>
 
-                {/* Mobile Menu Toggle */}
                 <button
                     className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    aria-label="Toggle menu"
                 >
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
 
-                {/* Mobile Navigation */}
                 <div className={`mobile-nav ${isMobileMenuOpen ? 'active' : ''}`}>
                     <ul className="nav-links">
                         {navLinks.map((link) => (
@@ -113,6 +118,7 @@ const Navbar = () => {
                         ))}
                     </ul>
                 </div>
+
             </div>
         </nav>
     );

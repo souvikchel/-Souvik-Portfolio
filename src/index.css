@@ -369,3 +369,7 @@ a {
   border-radius: 50%;
   animation: rotate 1s linear infinite;
 }
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}

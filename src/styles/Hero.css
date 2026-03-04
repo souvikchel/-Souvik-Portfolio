@@ -169,3 +169,49 @@
         bottom: 20px;
     }
 }
+
+/* Ensure the section is a proper container */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #030014;
+  overflow: hidden;
+}
+
+/* The Canvas should be the "Wallpaper" */
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allows clicking through to links */
+  z-index: 1; 
+}
+
+/* The Content should be the "Foreground" */
+.hero-content {
+  position: relative;
+  z-index: 10; /* Higher than canvas */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Blobs should be between canvas and content or behind canvas */
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  z-index: 2; /* Sits slightly above canvas lines but below text */
+  pointer-events: none;
+}
